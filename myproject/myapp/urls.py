@@ -5,5 +5,8 @@ from . import views
 
 
 urlpatterns = [
-    path('myapp/',views.index, name = "index"),
+    path('',views.index, name = "index"),
+    path('cotizacion-dolar',views.dolar, name = "dolar"),
+    path('aeropuertos',views.aeropuertos, name = "aeropuertos"),
+    path('aeropuertosjson',views.aeropuertos_json, name = "aeropuertosjson"),
 ]
