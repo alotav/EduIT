@@ -8,13 +8,22 @@
 </head>
 <body>
 
-        <thead>
+        <table style="text-align:left">
             <tr>
                 <th>Aeropuerto</th>
                 <th>Ciudad</th>
                 <th>Pais</th>
             </tr>
-        </thead>
+            
+                {% for nombre, ciudad, pais in aero %}
+                <tr>
+                    <th>{{nombre}}</th>
+                    <th>{{ciudad}}</th>
+                    <th>{{pais}}</th>
+                </tr>
+                {% endfor %}
+            
+        </table>
             
             
         <tr>

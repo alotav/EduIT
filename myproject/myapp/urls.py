@@ -9,4 +9,7 @@ urlpatterns = [
     path('cotizacion-dolar',views.dolar, name = "dolar"),
     path('aeropuertos',views.aeropuertos, name = "aeropuertos"),
     path('aeropuertosjson',views.aeropuertos_json, name = "aeropuertosjson"),
+    path('cursos',views.cursos, name = "cursos"),
+    path('nuevo_curso',views.nuevo_curso, name = "nuevo_curso"),
+    path('nueva_pelicula',views.nueva_pelicula, name = "nueva_pelicula"),
 ]
