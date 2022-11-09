@@ -16,3 +16,10 @@ class FormularioPeliculas(forms.Form):
     fecha_estreno = forms.DateField(label='Fecha de Estreno', widget=forms.DateInput(attrs={'type': 'date'}))
     publico = forms.IntegerField(label='Para mayores de:')
     preventa = forms.BooleanField(label='Preventa online?', required=False)
+
+
+
+class FormularioInstructor(forms.Form):
+    nombre = forms.CharField(label= 'Nombre',max_length=50)
+    email = forms.EmailField(label='Email')
+    cursos_asignados = forms.IntegerField(label='Cursos Asignados')

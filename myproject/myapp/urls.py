@@ -12,4 +12,6 @@ urlpatterns = [
     path('cursos',views.cursos, name = "cursos"),
     path('nuevo_curso',views.nuevo_curso, name = "nuevo_curso"),
     path('nueva_pelicula',views.nueva_pelicula, name = "nueva_pelicula"),
+    path('instructores',views.instructores, name = "instructores"),
+    path('agregar_instructores',views.agregar_instructores, name = "agregar_instructores")
 ]

@@ -7,6 +7,13 @@ import sqlite3
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+
+
+# MODELS:
+from .models import Curso, Instructor
+
+
+
 def index(request):
     return render(request, "myapp/index.html")
 
@@ -95,13 +102,20 @@ def aeropuertos_json(request):
     return JsonResponse(aeropuertos, safe=False)
 
 
+# def cursos(request):
+#     conn = sqlite3.connect("cursos.sqlite3")
+#     cursor = conn.cursor()
+#     cursor.execute("SELECT * FROM cursos")
+#     query = cursor.fetchall()
+#     conn.close()
+#     return render(request, 'myapp/cursos.html', {'query': query})
+
 def cursos(request):
-    conn = sqlite3.connect("cursos.sqlite3")
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM cursos")
-    query = cursor.fetchall()
-    conn.close()
-    return render(request, 'myapp/cursos.html', {'query': query})
+    cursos = Curso.objects.all()
+    ctx = {'cursos':cursos}
+    for c in cursos:
+        print(f"Nombre: {c.nombre}\nInscriptos: {c.inscriptos}")
+    return render(request, 'myapp/cursos.html', ctx)
 
 
 def nuevo_curso(request):
@@ -142,3 +156,27 @@ def nueva_pelicula(request):
         form = forms.FormularioPeliculas()
 
     return render(request, 'myapp/nueva_pelicula.html', {'form':form})
+
+
+def agregar_instructores(request):
+    if request.method == 'POST':
+        formu = forms.FormularioInstructor(request.POST)
+        if formu.is_valid():
+            # print(formu.cleaned_data)
+            Instructor.objects.create(
+                nombre = formu.cleaned_data['nombre'],
+                email = formu.cleaned_data['email'],
+                cursos_asignados = formu.cleaned_data['cursos_asignados']
+            )
+
+            return redirect('instructores')
+    else:
+        formu = forms.FormularioInstructor()
+        return render(request, 'myapp/form_instructores.html', {'formu':formu})
+
+
+
+def instructores(request):
+    instructores = Instructor.objects.all()
+    print (instructores)
+    return render(request, 'myapp/instructores.html', {'instructores':instructores})
