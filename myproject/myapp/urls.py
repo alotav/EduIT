@@ -13,5 +13,8 @@ urlpatterns = [
     path('nuevo_curso',views.nuevo_curso, name = "nuevo_curso"),
     path('nueva_pelicula',views.nueva_pelicula, name = "nueva_pelicula"),
     path('instructores',views.instructores, name = "instructores"),
-    path('agregar_instructores',views.agregar_instructores, name = "agregar_instructores")
+    path('agregar_instructores',views.agregar_instructores, name = "agregar_instructores"),
+    path('turno_manana',views.turno_manana, name = "turno_manana"),
+    path('turno_tarde',views.turno_tarde, name = "turno_tarde"),
+    path('turno_noche',views.turno_noche, name = "turno_noche")
 ]

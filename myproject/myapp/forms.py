@@ -1,14 +1,23 @@
 from django import forms
 
-class FormularioCurso(forms.Form):
-    nombre = forms.CharField(label="Nombre", max_length=128)
-    inscriptos = forms.IntegerField(label="Inscriptos")
-    turnos = (
-        (1, "Manana"),
-        (2, "Tarde"),
-        (3, "Noche")
-    )
-    turno = forms.ChoiceField(label='Turno', choices=turnos)
+# Para crear formulario a partir de un modelo:
+from django.forms import ModelForm
+from .models import Curso
+
+# class FormularioCurso(forms.Form):
+#     nombre = forms.CharField(label="Nombre", max_length=128)
+#     inscriptos = forms.IntegerField(label="Inscriptos")
+#     turnos = (
+#         (1, "Manana"),
+#         (2, "Tarde"),
+#         (3, "Noche")
+#     )
+#     turno = forms.ChoiceField(label='Turno', choices=turnos)
+
+class FormDesdeModelCurso(ModelForm):
+    class Meta: 
+        model = Curso
+        fields = ("nombre", "inscriptos", "turno")
 
 
 class FormularioPeliculas(forms.Form):

@@ -5,6 +5,12 @@ from django.db import models
 class Curso(models.Model):
     nombre = models.CharField(max_length=128)
     inscriptos = models.IntegerField()
+    turnos = (
+        (1, 'Manana'),
+        (2, 'Tarde'),
+        (3, 'Noche')
+    )
+    turno = models.PositiveSmallIntegerField(choices = turnos, null = True)
 
 
 class Instructor(models.Model):

@@ -118,21 +118,52 @@ def cursos(request):
     return render(request, 'myapp/cursos.html', ctx)
 
 
+
+# TOMANDO EL FORMULARIO CREADO DIRECTAMENTE DESDE FORMS.PY:
+# def nuevo_curso(request):
+#     if request.method == "POST":
+#         form = forms.FormularioCurso(request.POST)
+#         if form.is_valid():
+#             conn = sqlite3.connect("cursos.sqlite3")
+#             cursos = conn.cursor()
+#             cursos.execute("CREATE TABLE IF NOT EXISTS CURSOS(nombre CHAR(50) NOT NULL,cursos INTEGER NOT NULL)")
+#             cursos.execute("INSERT INTO cursos VALUES (?, ?)" , (form.cleaned_data["nombre"], form.cleaned_data["inscriptos"]) )
+#             conn.commit()
+#             conn.close()
+#             return HttpResponseRedirect(reverse("cursos"))
+#     else:
+#         form = forms.FormularioCurso()
+#     ctx = {"form": form}
+#     return render(request, "myapp/nuevo_curso.html", ctx)
+
+
+
+# USANDO FORMULARIO QUE HEREDA DESDE MODELS: AL HEREDAR DE MODELS, AHORA LOS CAMBIOS SE GUARDAN CON LA FUNCION save():
 def nuevo_curso(request):
     if request.method == "POST":
-        form = forms.FormularioCurso(request.POST)
+        form = forms.FormDesdeModelCurso(request.POST)
         if form.is_valid():
-            conn = sqlite3.connect("cursos.sqlite3")
-            cursos = conn.cursor()
-            cursos.execute("CREATE TABLE IF NOT EXISTS CURSOS(nombre CHAR(50) NOT NULL,cursos INTEGER NOT NULL)")
-            cursos.execute("INSERT INTO cursos VALUES (?, ?)" , (form.cleaned_data["nombre"], form.cleaned_data["inscriptos"]) )
-            conn.commit()
-            conn.close()
+            form.save()
             return HttpResponseRedirect(reverse("cursos"))
     else:
-        form = forms.FormularioCurso()
+        form = forms.FormDesdeModelCurso()
     ctx = {"form": form}
     return render(request, "myapp/nuevo_curso.html", ctx)
+
+
+def turno_manana(request):
+    consulta = Curso.objects.filter(turno = 1)
+    # for c in consulta:
+    #     print(c.nombre)
+    return render(request, "myapp/turno_manana.html", {'consulta':consulta})
+ 
+def turno_tarde(request):
+    consulta = Curso.objects.filter(turno = 2)
+    return render(request, "myapp/turno_tarde.html", {'consulta':consulta})
+
+def turno_noche(request):
+    consulta = Curso.objects.filter(turno = 3)
+    return render(request, "myapp/turno_noche.html", {'consulta':consulta})
 
 
 def nueva_pelicula(request):

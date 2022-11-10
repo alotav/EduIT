@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turno_tarde</title>
+</head>
+<body>
+    
+    <div>
+        <table>
+            <tr>
+                <td>Nombre</td>
+                <td>Inscriptos</td>
+                <td>Turno</td>
+            </tr>
+
+            {% for c in consulta %}
+            <tr>
+                <td>{{ c.nombre }}</td>
+                <td>{{ c.inscriptos }}</td>
+                <td>{{ c.turno }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+</body>
+</html>
