@@ -1,3 +1,9 @@
 Cuando usamos get post put delete, estamos haciendo una aplicacion api rest full (googlear sobre el tema)
 
 python manage.py -h -> nos da las opciones 
+
+Consola interactiva de Django:
+        python manage.py shell
+
+    - Para mejorar la consola: pip install ipython
+
